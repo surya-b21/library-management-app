@@ -1,6 +1,9 @@
 package service
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // Server struct
 type Server struct {
@@ -14,5 +17,6 @@ func (s *Server) Run(port string, handler http.Handler) error {
 		Handler: handler,
 	}
 
+	fmt.Println("Server listening on port :" + port)
 	return s.server.ListenAndServe()
 }

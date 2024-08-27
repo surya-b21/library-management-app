@@ -8,9 +8,11 @@ import (
 
 func main() {
 	routes := router.NewRoute()
-	server := new(service.Server)
+	server := service.Server{}
 
-	if err := server.Run("8000", routes.InitRoutes()); err != nil {
+	// service.InitDB()
+
+	if err := server.Run("8080", routes.InitRoutes()); err != nil {
 		log.Fatal(err)
 	}
 }

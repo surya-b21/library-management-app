@@ -1,6 +1,10 @@
 package router
 
-import "net/http"
+import (
+	"auth/app/controller"
+	"auth/app/middleware"
+	"net/http"
+)
 
 // Route struct
 type Route struct{}
@@ -12,10 +16,16 @@ func NewRoute() *Route {
 
 // InitRoutes to initiate route
 func (r *Route) InitRoutes() *http.ServeMux {
+	auth := controller.AuthController{}
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /test", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Test Route"))
+	mux.HandleFunc("POST /sign-in", auth.SignIn)
+	mux.HandleFunc("GET /protected", middleware.UserIdentify(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Success access protected route"))
+	}))
+
+	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Test route"))
 	})
 
 	return mux
