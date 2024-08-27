@@ -11,8 +11,8 @@ import (
 // Base struct
 type Base struct {
 	ID        *uuid.UUID       `json:"id,omitempty" gorm:"primaryKey;unique;type:varchar(36);not null" format:"uuid"`
-	CreatedAt *strfmt.DateTime `json:"created_at,omitempty" gorm:"type:datetime" format:"date-time" swaggertype:"string"`
-	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty" gorm:"type:datetime" format:"date-time" swaggertype:"string"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty" gorm:"type:timestamp" format:"date-time" swaggertype:"string"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty" gorm:"type:timestamp" format:"date-time" swaggertype:"string"`
 	DeletedAt gorm.DeletedAt   `json:"-" gorm:"index" swaggerignore:"true"`
 }
 

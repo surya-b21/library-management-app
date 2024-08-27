@@ -17,3 +17,5 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: auth_db
+    ports:
+      - 5432:5432

@@ -1,7 +1,7 @@
 package router
 
 import (
-	"auth/app/controller"
+	"auth/app/controller/auth"
 	"auth/app/middleware"
 	"net/http"
 )
@@ -16,9 +16,10 @@ func NewRoute() *Route {
 
 // InitRoutes to initiate route
 func (r *Route) InitRoutes() *http.ServeMux {
-	auth := controller.AuthController{}
+	auth := auth.AuthHandler{}
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("POST /sign-up", auth.SignUp)
 	mux.HandleFunc("POST /sign-in", auth.SignIn)
 	mux.HandleFunc("GET /protected", middleware.UserIdentify(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Success access protected route"))
