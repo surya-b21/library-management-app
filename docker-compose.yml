@@ -16,11 +16,8 @@ services:
     image: golang:1.22-alpine
     working_dir: /app/auth
     volumes:
-      - ./auth:/app/auth
-    command:
-      - tail
-      - -f
-      - /etc/hosts
+      - .:/app
+    command: go run .
     environment:
       - PORT=8080
     ports:
@@ -52,13 +49,10 @@ services:
     #   context: ./auth
     #   dockerfile: Dockerfile
     image: golang:1.22-alpine
-    working_dir: /app/book
+    working_dir: /app
     volumes:
-      - ./book:/app/book
-    command:
-      - tail
-      - -f
-      - /etc/hosts
+      - ./book:/app
+    command: go run .
     environment:
       - PORT=8080
     ports:

@@ -4,10 +4,10 @@ go 1.22.6
 
 replace github.com/surya-b21/library-management-app/book => ../book
 
-require github.com/surya-b21/library-management-app/book v0.0.1
-
 require (
 	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/surya-b21/library-management-app/book v0.0.0-00010101000000-000000000000
+	google.golang.org/protobuf v1.34.1
 	gorm.io/driver/postgres v1.5.9
 )
 
@@ -20,7 +20,6 @@ require (
 	golang.org/x/net v0.26.0 // indirect
 	golang.org/x/sys v0.21.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
 )
 
 require (

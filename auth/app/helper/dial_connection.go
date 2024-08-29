@@ -1,7 +1,6 @@
 package helper
 
 import (
-	"flag"
 	"log"
 
 	"google.golang.org/grpc"
@@ -13,17 +12,11 @@ var address = map[string]string{
 }
 
 func ServerDial(service string) *grpc.ClientConn {
-	serverAddr := flag.String(
-		"server", address[service],
-		"The server address in the format of host:port",
-	)
-	flag.Parse()
-
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
-	conn, err := grpc.NewClient(*serverAddr, opts...)
+	conn, err := grpc.NewClient(address[service], opts...)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 		return nil
