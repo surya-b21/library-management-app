@@ -1,9 +1,10 @@
 package repo
 
 import (
-	"book/app/model"
-	"book/app/service"
 	"context"
+
+	"github.com/surya-b21/library-management-app/book/app/model"
+	"github.com/surya-b21/library-management-app/book/app/service"
 )
 
 type BookRepository struct{}

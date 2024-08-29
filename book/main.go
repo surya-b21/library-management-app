@@ -1,14 +1,15 @@
 package main
 
 import (
-	"book/app/handler"
-	"book/app/pb"
-	"book/app/repo"
-	"book/app/service"
 	"fmt"
 	"log"
 	"net"
 	"os"
+
+	"github.com/surya-b21/library-management-app/book/app/handler"
+	"github.com/surya-b21/library-management-app/book/app/pb"
+	"github.com/surya-b21/library-management-app/book/app/repo"
+	"github.com/surya-b21/library-management-app/book/app/service"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

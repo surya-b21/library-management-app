@@ -1,7 +1,7 @@
 package service
 
 import (
-	"book/app/model"
+	"github.com/surya-b21/library-management-app/book/app/model"
 
 	"gorm.io/gorm"
 )

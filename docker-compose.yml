@@ -28,7 +28,7 @@ services:
     networks:
       go:
         aliases:
-          - auth_service
+          - auth-service
     depends_on:
       - auth_db
 
@@ -66,7 +66,7 @@ services:
     networks:
       go:
         aliases:
-          - book_service
+          - book-service
     depends_on:
       - book_db
 

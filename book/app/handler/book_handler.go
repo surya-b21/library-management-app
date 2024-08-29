@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"book/app/model"
-	"book/app/pb"
-	"book/app/repo"
 	"context"
+
+	"github.com/surya-b21/library-management-app/book/app/model"
+	"github.com/surya-b21/library-management-app/book/app/pb"
+	"github.com/surya-b21/library-management-app/book/app/repo"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
