@@ -17,7 +17,7 @@ var DB *gorm.DB
 // InitDB function to init db
 func InitDB() {
 	if DB == nil {
-		dsn := "host=127.0.0.1 user=postgres password=password dbname=auth_db port=5432 sslmode=disable TimeZone=Asia/Jakarta"
+		dsn := "host=book_db user=postgres password=password dbname=book_db port=5432 sslmode=disable TimeZone=Asia/Jakarta"
 		config := &gorm.Config{
 			Logger: logger.New(
 				log.New(os.Stderr, "[GORM] ", log.LstdFlags), // io writer
@@ -35,9 +35,8 @@ func InitDB() {
 		}
 
 		if db, err := gorm.Open(postgres.Open(dsn), config); err == nil {
-			// AutoMigrate(db.Debug())
-
 			DB = db.Debug()
+			AutoMigrate(DB)
 		}
 	}
 }

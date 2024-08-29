@@ -9,12 +9,26 @@ volumes:
 
 services:
   auth_service:
-    container_name: auth_service
-    build:
-      context: ./auth
-      dockerfile: Dockerfile
+    # container_name: auth_service
+    # build:
+    #   context: ./auth
+    #   dockerfile: Dockerfile
+    image: golang:1.22-alpine
+    working_dir: /app/auth
+    volumes:
+      - ./auth:/app/auth
+    command:
+      - tail
+      - -f
+      - /etc/hosts
+    environment:
+      - PORT=8080
     ports:
       - 8080:8080
+    networks:
+      go:
+        aliases:
+          - auth_service
     depends_on:
       - auth_db
 
@@ -27,3 +41,45 @@ services:
       POSTGRES_DB: auth_db
     ports:
       - 5432:5432
+    networks:
+      go:
+        aliases:
+          - auth_db
+
+  book_service:
+    # container_name: book_service
+    # build:
+    #   context: ./auth
+    #   dockerfile: Dockerfile
+    image: golang:1.22-alpine
+    working_dir: /app/book
+    volumes:
+      - ./book:/app/book
+    command:
+      - tail
+      - -f
+      - /etc/hosts
+    environment:
+      - PORT=8080
+    ports:
+      - 8081:8080
+    networks:
+      go:
+        aliases:
+          - book_service
+    depends_on:
+      - book_db
+
+  book_db:
+    image: postgres:16-alpine
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: book_db
+    ports:
+      - 5433:5432
+    networks:
+      go:
+        aliases:
+          - book_db

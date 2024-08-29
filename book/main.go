@@ -5,8 +5,10 @@ import (
 	"book/app/pb"
 	"book/app/repo"
 	"book/app/service"
+	"fmt"
 	"log"
 	"net"
+	"os"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -15,7 +17,8 @@ import (
 func main() {
 	service.InitDB()
 
-	listener, err := net.Listen("tcp", ":8080")
+	listener, err := net.Listen("tcp", ":"+os.Getenv("PORT"))
+	fmt.Println("Server listening on port :" + os.Getenv("PORT"))
 	if err != nil {
 		log.Fatalln("failed to create listener:", err)
 	}

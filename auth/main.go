@@ -4,6 +4,7 @@ import (
 	"auth/app/router"
 	"auth/app/service"
 	"log"
+	"os"
 )
 
 func main() {
@@ -12,7 +13,7 @@ func main() {
 
 	service.InitDB()
 
-	if err := server.Run("8080", routes.InitRoutes()); err != nil {
+	if err := server.Run(os.Getenv("PORT"), routes.InitRoutes()); err != nil {
 		log.Fatal(err)
 	}
 }
