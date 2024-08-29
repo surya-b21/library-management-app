@@ -1,7 +1,7 @@
 package service
 
 import (
-	"auth/app/model"
+	"github.com/surya-b21/library-management-app/auth/app/model"
 
 	"gorm.io/gorm"
 )

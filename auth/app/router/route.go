@@ -1,9 +1,10 @@
 package router
 
 import (
-	"auth/app/controller/auth"
-	"auth/app/middleware"
 	"net/http"
+
+	"github.com/surya-b21/library-management-app/auth/app/controller/auth"
+	"github.com/surya-b21/library-management-app/auth/app/middleware"
 )
 
 // Route struct

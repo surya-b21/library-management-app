@@ -1,12 +1,13 @@
 package auth
 
 import (
-	"auth/app/helper"
-	"auth/app/model"
-	"auth/app/service"
 	"encoding/json"
 	"net/http"
 	"time"
+
+	"github.com/surya-b21/library-management-app/auth/app/helper"
+	"github.com/surya-b21/library-management-app/auth/app/model"
+	"github.com/surya-b21/library-management-app/auth/app/service"
 
 	"github.com/golang-jwt/jwt/v5"
 )

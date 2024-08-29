@@ -1,9 +1,10 @@
 package auth
 
 import (
-	"auth/app/helper"
 	"crypto/sha256"
 	"fmt"
+
+	"github.com/surya-b21/library-management-app/auth/app/helper"
 )
 
 // AuthHandler struct

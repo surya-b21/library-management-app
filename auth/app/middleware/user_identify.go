@@ -1,10 +1,11 @@
 package middleware
 
 import (
-	"auth/app/helper"
 	"errors"
 	"net/http"
 	"strings"
+
+	"github.com/surya-b21/library-management-app/auth/app/helper"
 
 	"github.com/golang-jwt/jwt/v5"
 )

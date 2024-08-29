@@ -1,10 +1,11 @@
 package main
 
 import (
-	"auth/app/router"
-	"auth/app/service"
 	"log"
 	"os"
+
+	"github.com/surya-b21/library-management-app/auth/app/router"
+	"github.com/surya-b21/library-management-app/auth/app/service"
 )
 
 func main() {
