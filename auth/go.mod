@@ -6,10 +6,13 @@ replace github.com/surya-b21/library-management-app/book => ../book
 
 replace github.com/surya-b21/library-management-app/author => ../author
 
+replace github.com/surya-b21/library-management-app/category => ../category
+
 require (
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/surya-b21/library-management-app/author v0.0.0-00010101000000-000000000000
 	github.com/surya-b21/library-management-app/book v0.0.0-00010101000000-000000000000
+	github.com/surya-b21/library-management-app/category v0.0.0-00010101000000-000000000000
 	google.golang.org/protobuf v1.34.1
 	gorm.io/driver/postgres v1.5.9
 )

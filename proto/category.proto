@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package author;
+
+option go_package = "./category/app/pb";
+
+service CategoryService {
+    rpc Get(google.protobuf.Empty) returns (CategoryList);
+    rpc Create(CategoryRequest) returns (Category);
+    rpc GetOne(CategoryId) returns (Category);
+    rpc Update(CategoryUpdate) returns (Category);
+    rpc Delete(CategoryId) returns (google.protobuf.Empty);
+}
+
+message Category {
+    string id = 1;
+    string name = 2;
+}
+
+message CategoryRequest {
+    string name = 1;
+}
+
+message CategoryList {
+    repeated Category category = 1;
+}
+
+message CategoryId {
+    string id = 1;
+}
+
+message CategoryUpdate {
+    string id = 1;
+    string name = 2;
+}

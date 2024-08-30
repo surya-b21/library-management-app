@@ -81,7 +81,7 @@ services:
   author_service:
     # container_name: author_service
     # build:
-    #   context: ./auth
+    #   context: ./author
     #   dockerfile: Dockerfile
     image: golang:1.22-alpine
     working_dir: /app
@@ -91,7 +91,7 @@ services:
     environment:
       - PORT=8080
     ports:
-      - 8081:8080
+      - 8082:8080
     networks:
       go:
         aliases:
@@ -107,8 +107,43 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: author_db
     ports:
-      - 5433:5432
+      - 5434:5432
     networks:
       go:
         aliases:
           - author_db
+
+  category_service:
+    # container_name: category_service
+    # build:
+    #   context: ./category
+    #   dockerfile: Dockerfile
+    image: golang:1.22-alpine
+    working_dir: /app
+    volumes:
+      - ./category:/app
+    command: go run .
+    environment:
+      - PORT=8080
+    ports:
+      - 8083:8080
+    networks:
+      go:
+        aliases:
+          - category-service
+    depends_on:
+      - category_db
+
+  category_db:
+    image: postgres:16-alpine
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: category_db
+    ports:
+      - 5435:5432
+    networks:
+      go:
+        aliases:
+          - category_db

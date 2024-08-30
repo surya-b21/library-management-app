@@ -16,7 +16,7 @@ service AuthorService {
 
 message Author {
     string id = 1;
-    string name = 5;
+    string name = 2;
 }
 
 message AuthorRequest {
