@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package author;
+
+option go_package = "./author/app/pb";
+
+service AuthorService {
+    rpc Get(google.protobuf.Empty) returns (AuthorList);
+    rpc Create(AuthorRequest) returns (Author);
+    rpc GetOne(AuthorId) returns (Author);
+    rpc Update(AuthorUpdate) returns (Author);
+    rpc Delete(AuthorId) returns (google.protobuf.Empty);
+}
+
+message Author {
+    string id = 1;
+    string name = 5;
+}
+
+message AuthorRequest {
+    string name = 1;
+}
+
+message AuthorList {
+    repeated Author author = 1;
+}
+
+message AuthorId {
+    string id = 1;
+}
+
+message AuthorUpdate {
+    string id = 1;
+    string name = 2;
+}

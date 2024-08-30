@@ -8,7 +8,8 @@ import (
 )
 
 var address = map[string]string{
-	"book": "book-service:8080",
+	"book":   "book-service:8080",
+	"author": "author-service:8080",
 }
 
 func ServerDial(service string) *grpc.ClientConn {
