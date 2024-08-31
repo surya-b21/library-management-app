@@ -13,6 +13,14 @@ import (
 )
 
 // SignIn function
+// @Summary      Sign In
+// @Description  Sign in to get bearer token
+// @Tags         Auth
+// @Accept       application/json
+// @Produce		 application/json
+// @Param        data   body  auth.SignInBody  true  "Sign In Payload"
+// @Success      200  {object} auth.JsonResult
+// @Router       /sign-in [post]
 func (handler *AuthHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 	var body SignInBody
 

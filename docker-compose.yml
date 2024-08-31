@@ -147,3 +147,12 @@ services:
       go:
         aliases:
           - category_db
+
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    environment:
+      - URL=/docs/swagger.yaml
+    volumes:
+      - ./auth/docs:/usr/share/nginx/html/docs
+    ports:
+      - 8084:8080

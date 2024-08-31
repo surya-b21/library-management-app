@@ -15,6 +15,15 @@ type body struct {
 	Name string `json:"name,omitempty"`
 }
 
+// CategoryPost function
+// @Summary      CategoryPost
+// @Description  Create a new category
+// @Tags         Category
+// @Accept       application/json
+// @Produce		 application/json
+// @Param data body category.body true "Category Payload"
+// @Success      200 {object} pb.Category
+// @Router       /category [post]
 func CategoryPost(w http.ResponseWriter, r *http.Request) {
 	var body body
 	err := json.NewDecoder(r.Body).Decode(&body)

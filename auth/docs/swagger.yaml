@@ -1,0 +1,513 @@
+basePath: /
+definitions:
+  auth.JsonResult:
+    properties:
+      expired:
+        type: integer
+      token:
+        type: string
+    type: object
+  auth.SignInBody:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  auth.SignUpBody:
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  author.body:
+    properties:
+      name:
+        type: string
+    type: object
+  book.body:
+    properties:
+      author_id:
+        type: string
+      category_id:
+        type: string
+      pages:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+    type: object
+  category.body:
+    properties:
+      name:
+        type: string
+    type: object
+  pb.Author:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  pb.Book:
+    properties:
+      author_id:
+        type: string
+      category_id:
+        type: string
+      id:
+        type: string
+      pages:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+    type: object
+  pb.Category:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: For library management api for test purpose
+  title: Library Management App API
+  version: "1.0"
+paths:
+  /author:
+    get:
+      consumes:
+      - application/json
+      description: Get list author
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pb.Author'
+            type: array
+      summary: AuthorGet
+      tags:
+      - Author
+    post:
+      consumes:
+      - application/json
+      description: Create a new author
+      parameters:
+      - description: Author Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/author.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Author'
+      summary: AuthorPost
+      tags:
+      - Author
+  /author/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a author
+      parameters:
+      - description: Author ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully delete author
+          schema:
+            type: string
+      summary: AuthorDelete
+      tags:
+      - Author
+    get:
+      consumes:
+      - application/json
+      description: Get author by id
+      parameters:
+      - description: Author ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Author'
+      summary: AuthorIdGet
+      tags:
+      - Author
+    put:
+      consumes:
+      - application/json
+      description: Update a author
+      parameters:
+      - description: Author ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Author Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/author.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Author'
+      summary: AuthorPut
+      tags:
+      - Author
+  /book:
+    get:
+      consumes:
+      - application/json
+      description: Get list of book
+      parameters:
+      - description: Book title
+        in: query
+        name: title
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pb.Book'
+            type: array
+      summary: BookGet
+      tags:
+      - Book
+    post:
+      consumes:
+      - application/json
+      description: Create a new book
+      parameters:
+      - description: Book Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/book.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Book'
+      summary: BookPost
+      tags:
+      - Book
+  /book-recommendation:
+    get:
+      consumes:
+      - application/json
+      description: Get list of recommendation book
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pb.Book'
+            type: array
+      summary: BookRecomendation
+      tags:
+      - Book
+  /book/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully delete book
+          schema:
+            type: string
+      summary: BookDelete
+      tags:
+      - Book
+    get:
+      consumes:
+      - application/json
+      description: Get book by id
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Book'
+      summary: BookIdGet
+      tags:
+      - Book
+    put:
+      consumes:
+      - application/json
+      description: Edit book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Book Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/book.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Book'
+      summary: BookPut
+      tags:
+      - Book
+  /book/borrow/{id}:
+    post:
+      consumes:
+      - application/json
+      description: Borrow a book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully borrow book
+          schema:
+            type: string
+      summary: BookBorrow
+      tags:
+      - Book
+  /book/return/{id}:
+    post:
+      consumes:
+      - application/json
+      description: Return a book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully return book
+          schema:
+            type: string
+      summary: BookReturn
+      tags:
+      - Book
+  /category:
+    get:
+      consumes:
+      - application/json
+      description: Get list category
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pb.Category'
+            type: array
+      summary: CategoryGet
+      tags:
+      - Category
+    post:
+      consumes:
+      - application/json
+      description: Create a new category
+      parameters:
+      - description: Category Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/category.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Category'
+      summary: CategoryPost
+      tags:
+      - Category
+  /category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a category
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully delete category
+          schema:
+            type: string
+      summary: CategoryDelete
+      tags:
+      - Category
+    get:
+      consumes:
+      - application/json
+      description: Get category by id
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Category'
+      summary: CategoryIdGet
+      tags:
+      - Category
+    put:
+      consumes:
+      - application/json
+      description: Update a category
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Category Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/category.body'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.Category'
+      summary: CategoryPut
+      tags:
+      - Category
+  /sign-in:
+    post:
+      consumes:
+      - application/json
+      description: Sign in to get bearer token
+      parameters:
+      - description: Sign In Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/auth.SignInBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.JsonResult'
+      summary: Sign In
+      tags:
+      - Auth
+  /sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Sign up new account
+      parameters:
+      - description: Sign Up Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/auth.SignUpBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.JsonResult'
+      summary: Sign Up
+      tags:
+      - Auth
+securityDefinitions:
+  "":
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

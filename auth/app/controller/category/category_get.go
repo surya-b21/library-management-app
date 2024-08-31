@@ -12,6 +12,14 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
+// CategoryGet
+// @Summary      CategoryGet
+// @Description  Get list category
+// @Tags         Category
+// @Accept       application/json
+// @Produce		 application/json
+// @Success      200 {object} []pb.Category
+// @Router       /category [get]
 func CategoryGet(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("category")
 	if conn == nil {

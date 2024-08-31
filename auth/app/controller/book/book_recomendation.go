@@ -12,6 +12,14 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// BookRecomendation
+// @Summary      BookRecomendation
+// @Description  Get list of recommendation book
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Success      200 {object} []pb.Book
+// @Router       /book-recommendation [get]
 func BookRecomendation(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("book")
 	if conn == nil {

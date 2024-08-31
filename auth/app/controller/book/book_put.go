@@ -11,6 +11,16 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// BookPut
+// @Summary      BookPut
+// @Description  Edit book
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Book ID"
+// @Param data body book.body true "Book Payload"
+// @Success      200 {object} pb.Book
+// @Router       /book/{id} [put]
 func BookPut(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

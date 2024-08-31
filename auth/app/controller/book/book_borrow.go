@@ -11,6 +11,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// BookBorrow
+// @Summary      BookBorrow
+// @Description Borrow a book
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Book ID"
+// @Success      200  {string} string "Successfully borrow book"
+// @Router       /book/borrow/{id} [post]
 func BookBorrow(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

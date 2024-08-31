@@ -10,6 +10,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// AuthorDelete function
+// @Summary      AuthorDelete
+// @Description  Delete a author
+// @Tags         Author
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Author ID"
+// @Success      200  {string} string "Successfully delete author"
+// @Router       /author/{id} [delete]
 func AuthorDelete(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

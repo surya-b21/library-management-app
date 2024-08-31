@@ -11,6 +11,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// AuthorIdGet
+// @Summary      AuthorIdGet
+// @Description  Get author by id
+// @Tags         Author
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Author ID"
+// @Success      200 {object} pb.Author
+// @Router       /author/{id} [get]
 func AuthorIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

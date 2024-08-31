@@ -12,6 +12,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// BookIdGet function
+// @Summary      BookIdGet
+// @Description  Get book by id
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Book ID"
+// @Success      200 {object} pb.Book
+// @Router       /book/{id} [get]
 func BookIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

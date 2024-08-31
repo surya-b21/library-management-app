@@ -10,6 +10,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// CategoryDelete function
+// @Summary      CategoryDelete
+// @Description  Delete a category
+// @Tags         Category
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Category ID"
+// @Success      200  {string} string "Successfully delete category"
+// @Router       /category/{id} [delete]
 func CategoryDelete(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

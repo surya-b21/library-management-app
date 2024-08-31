@@ -23,6 +23,12 @@ type SignInBody struct {
 	Password string `json:"password"`
 }
 
+// JsonResult for result
+type JsonResult struct {
+	Token   string `json:"token,omitempty"`
+	Expired int32  `json:"expired,omitempty"`
+}
+
 func generatePasswordHash(password string) string {
 	hash := sha256.New()
 	hash.Write([]byte(password))

@@ -11,6 +11,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// BookReturn
+// @Summary      BookReturn
+// @Description Return a book
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Book ID"
+// @Success      200  {string} string "Successfully return book"
+// @Router       /book/return/{id} [post]
 func BookReturn(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

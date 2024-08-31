@@ -11,6 +11,16 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// CategoryPut function
+// @Summary      CategoryPut
+// @Description  Update a category
+// @Tags         Category
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Category ID"
+// @Param data body category.body true "Category Payload"
+// @Success      200 {object} pb.Category
+// @Router       /category/{id} [put]
 func CategoryPut(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

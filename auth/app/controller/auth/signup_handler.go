@@ -13,6 +13,14 @@ import (
 )
 
 // SignUp function
+// @Summary      Sign Up
+// @Description  Sign up new account
+// @Tags         Auth
+// @Accept       application/json
+// @Produce		 application/json
+// @Param        data   body  auth.SignUpBody  true  "Sign Up Payload"
+// @Success      200  {object} auth.JsonResult
+// @Router       /sign-up [post]
 func (handler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	var body SignUpBody
 

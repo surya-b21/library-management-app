@@ -19,6 +19,15 @@ type body struct {
 	Stock      int32  `json:"stock,omitempty"`
 }
 
+// BookPost function
+// @Summary      BookPost
+// @Description  Create a new book
+// @Tags         Book
+// @Accept       application/json
+// @Produce		 application/json
+// @Param data body book.body true "Book Payload"
+// @Success      200 {object} pb.Book
+// @Router       /book [post]
 func BookPost(w http.ResponseWriter, r *http.Request) {
 	var body body
 	err := json.NewDecoder(r.Body).Decode(&body)

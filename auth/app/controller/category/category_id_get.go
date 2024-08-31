@@ -11,6 +11,15 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
+// CategoryIdGet
+// @Summary      CategoryIdGet
+// @Description  Get category by id
+// @Tags         Category
+// @Accept       application/json
+// @Produce		 application/json
+// @Param id path string true "Category ID"
+// @Success      200 {object} pb.Category
+// @Router       /category/{id} [get]
 func CategoryIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

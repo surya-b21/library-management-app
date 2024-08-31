@@ -12,6 +12,14 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
+// AuthorGet
+// @Summary      AuthorGet
+// @Description  Get list author
+// @Tags         Author
+// @Accept       application/json
+// @Produce		 application/json
+// @Success      200 {object} []pb.Author
+// @Router       /author [get]
 func AuthorGet(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("author")
 	if conn == nil {
