@@ -3,7 +3,7 @@ package book
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"sync"
 	"time"
@@ -27,7 +27,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 	res, err := client.Get(ctx, &emptypb.Empty{})
 	if err != nil {
-		log.Println("error sending request:", err)
+		fmt.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -56,7 +56,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 			res, err := client.GetOne(ctx, &pb.AuthorId{Id: book.AuthorId})
 			if err != nil {
-				log.Println("error sending request:", err)
+				fmt.Println("error sending request:", err)
 				return
 			}
 
@@ -82,7 +82,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 			res, err := client.GetOne(ctx, &pb.CategoryId{Id: book.CategoryId})
 			if err != nil {
-				log.Println("error sending request:", err)
+				fmt.Println("error sending request:", err)
 				return
 			}
 
@@ -108,7 +108,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 	json, err := json.Marshal(listBook)
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 
 	helper.NewSuccessResponse(w, json)

@@ -2,7 +2,7 @@ package helper
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 )
 
@@ -15,7 +15,7 @@ func NewErrorResponse(w http.ResponseWriter, statusCode int, errors string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	w.Write(response)
-	log.Printf("error: %s", errors)
+	fmt.Printf("error: %s", errors)
 }
 
 // NewSuccessResponse for success response

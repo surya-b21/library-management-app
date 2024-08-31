@@ -2,7 +2,7 @@ package author
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -30,7 +30,7 @@ func AuthorDelete(w http.ResponseWriter, r *http.Request) {
 
 	_, err := client.Delete(ctx, &pb.AuthorId{Id: id})
 	if err != nil {
-		log.Println("error sending request:", err)
+		fmt.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}

@@ -3,7 +3,7 @@ package book
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"sync"
 	"time"
@@ -32,7 +32,7 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 
 	res, err := client.GetOne(ctx, &pb.BookId{Id: id})
 	if err != nil {
-		log.Println("error sending request:", err)
+		fmt.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -66,7 +66,7 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 
 		res, err := client.GetOne(ctx, &pb.AuthorId{Id: res.AuthorId})
 		if err != nil {
-			log.Println("error sending request:", err)
+			fmt.Println("error sending request:", err)
 			return
 		}
 
@@ -92,7 +92,7 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 
 		res, err := client.GetOne(ctx, &pb.CategoryId{Id: res.CategoryId})
 		if err != nil {
-			log.Println("error sending request:", err)
+			fmt.Println("error sending request:", err)
 			return
 		}
 
@@ -107,7 +107,7 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 	json, err := json.Marshal(mapResult)
 
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 
 	helper.NewSuccessResponse(w, json)

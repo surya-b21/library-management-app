@@ -2,7 +2,7 @@ package helper
 
 import (
 	"crypto/tls"
-	"log"
+	"fmt"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -25,7 +25,7 @@ func ServerDial(service string) *grpc.ClientConn {
 
 	conn, err := grpc.NewClient(address[service], opts...)
 	if err != nil {
-		log.Printf("fail to dial: %v\n", err)
+		fmt.Printf("fail to dial: %v\n", err)
 		return nil
 	}
 

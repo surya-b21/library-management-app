@@ -3,7 +3,7 @@ package book
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -31,7 +31,7 @@ func BookBorrow(w http.ResponseWriter, r *http.Request) {
 
 	_, err := client.Borrow(ctx, &pb.BookId{Id: id})
 	if err != nil {
-		log.Println("error sending request:", err)
+		fmt.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -41,7 +41,7 @@ func BookBorrow(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 
 	helper.NewSuccessResponse(w, json)

@@ -3,7 +3,7 @@ package category
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -41,7 +41,7 @@ func CategoryPut(w http.ResponseWriter, r *http.Request) {
 		Name: body.Name,
 	})
 	if err != nil {
-		log.Println("error sending request:", err)
+		fmt.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -52,7 +52,7 @@ func CategoryPut(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 	helper.NewSuccessResponse(w, json)
 }
