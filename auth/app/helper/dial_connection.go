@@ -1,11 +1,10 @@
 package helper
 
 import (
-	"crypto/tls"
 	"fmt"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var address = map[string]string{
@@ -17,10 +16,7 @@ var address = map[string]string{
 func ServerDial(service string) *grpc.ClientConn {
 	opts := []grpc.DialOption{
 		// uncomment it when using in localhost
-		// grpc.WithTransportCredentials(insecure.NewCredentials()),
-
-		// use when build dockerfile
-		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: false})),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
 	conn, err := grpc.NewClient(address[service], opts...)
