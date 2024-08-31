@@ -41,7 +41,7 @@ func AuthorPut(w http.ResponseWriter, r *http.Request) {
 		Name: body.Name,
 	})
 	if err != nil {
-		log.Fatalln("error sending request:", err)
+		log.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -52,7 +52,7 @@ func AuthorPut(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	helper.NewSuccessResponse(w, json)
 }

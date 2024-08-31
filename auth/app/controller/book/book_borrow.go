@@ -41,7 +41,7 @@ func BookBorrow(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	helper.NewSuccessResponse(w, json)

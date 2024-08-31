@@ -27,7 +27,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 	res, err := client.Get(ctx, &emptypb.Empty{})
 	if err != nil {
-		log.Fatalln("error sending request:", err)
+		log.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
 		return
 	}
@@ -108,7 +108,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 	json, err := json.Marshal(listBook)
 	if err != nil {
-		log.Fatal(err)
+		log.Prinln(err)
 	}
 
 	helper.NewSuccessResponse(w, json)
