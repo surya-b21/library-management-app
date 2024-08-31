@@ -36,12 +36,13 @@ func BookPut(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	res, err := client.Update(ctx, &pb.BookUpdate{
+	res, err := client.Update(ctx, &pb.Book{
 		Id:         id,
 		Title:      body.Title,
 		Pages:      body.Pages,
 		AuthorId:   body.AuthorID,
 		CategoryId: body.CategoryID,
+		Stock:      body.Stock,
 	})
 	if err != nil {
 		log.Fatalln("error sending request:", err)

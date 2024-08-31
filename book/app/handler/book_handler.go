@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"errors"
 	"sync"
 
 	"github.com/surya-b21/library-management-app/book/app/model"
@@ -49,6 +50,7 @@ func (h *Handler) Create(ctx context.Context, req *pb.BookRequest) (*pb.Book, er
 		Pages:      &req.Pages,
 		AuthorID:   &authorId,
 		CategoryID: &categoryId,
+		Stock:      &req.Stock,
 	}
 
 	result := h.repo.Create(ctx, book)
@@ -59,6 +61,7 @@ func (h *Handler) Create(ctx context.Context, req *pb.BookRequest) (*pb.Book, er
 		Pages:      *result.Pages,
 		AuthorId:   result.AuthorID.String(),
 		CategoryId: result.CategoryID.String(),
+		Stock:      *result.Stock,
 	}, nil
 }
 
@@ -74,6 +77,7 @@ func (h *Handler) Get(ctx context.Context, req *emptypb.Empty) (*pb.BookList, er
 			Pages:      *v.Pages,
 			AuthorId:   v.AuthorID.String(),
 			CategoryId: v.CategoryID.String(),
+			Stock:      *v.Stock,
 		}
 
 		bookList[i] = &book
@@ -97,10 +101,11 @@ func (h *Handler) GetOne(ctx context.Context, req *pb.BookId) (*pb.Book, error) 
 		Pages:      *result.Pages,
 		AuthorId:   result.AuthorID.String(),
 		CategoryId: result.CategoryID.String(),
+		Stock:      *result.Stock,
 	}, nil
 }
 
-func (h *Handler) Update(ctx context.Context, req *pb.BookUpdate) (*pb.Book, error) {
+func (h *Handler) Update(ctx context.Context, req *pb.Book) (*pb.Book, error) {
 	if req.Id == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "id cannot empty")
 	}
@@ -112,6 +117,7 @@ func (h *Handler) Update(ctx context.Context, req *pb.BookUpdate) (*pb.Book, err
 		Pages:      &req.Pages,
 		AuthorID:   &authorId,
 		CategoryID: &categoryId,
+		Stock:      &req.Stock,
 	}
 
 	result := h.repo.Update(ctx, bookApi, req.Id)
@@ -122,6 +128,7 @@ func (h *Handler) Update(ctx context.Context, req *pb.BookUpdate) (*pb.Book, err
 		Pages:      *result.Pages,
 		AuthorId:   result.AuthorID.String(),
 		CategoryId: result.CategoryID.String(),
+		Stock:      *result.Stock,
 	}, nil
 }
 
@@ -144,8 +151,12 @@ func (h *Handler) Borrow(ctx context.Context, req *pb.BookId) (*emptypb.Empty, e
 	var mtx sync.Mutex
 
 	mtx.Lock()
-	h.repo.Borrow(ctx, req.Id)
+	response := h.repo.Borrow(ctx, req.Id)
 	mtx.Unlock()
+
+	if response != nil {
+		return nil, errors.New(*response)
+	}
 
 	return &emptypb.Empty{}, nil
 }

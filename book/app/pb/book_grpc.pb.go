@@ -36,7 +36,7 @@ type BookServiceClient interface {
 	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*BookList, error)
 	Create(ctx context.Context, in *BookRequest, opts ...grpc.CallOption) (*Book, error)
 	GetOne(ctx context.Context, in *BookId, opts ...grpc.CallOption) (*Book, error)
-	Update(ctx context.Context, in *BookUpdate, opts ...grpc.CallOption) (*Book, error)
+	Update(ctx context.Context, in *Book, opts ...grpc.CallOption) (*Book, error)
 	Delete(ctx context.Context, in *BookId, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Borrow(ctx context.Context, in *BookId, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Return(ctx context.Context, in *BookId, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -80,7 +80,7 @@ func (c *bookServiceClient) GetOne(ctx context.Context, in *BookId, opts ...grpc
 	return out, nil
 }
 
-func (c *bookServiceClient) Update(ctx context.Context, in *BookUpdate, opts ...grpc.CallOption) (*Book, error) {
+func (c *bookServiceClient) Update(ctx context.Context, in *Book, opts ...grpc.CallOption) (*Book, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Book)
 	err := c.cc.Invoke(ctx, BookService_Update_FullMethodName, in, out, cOpts...)
@@ -127,7 +127,7 @@ type BookServiceServer interface {
 	Get(context.Context, *emptypb.Empty) (*BookList, error)
 	Create(context.Context, *BookRequest) (*Book, error)
 	GetOne(context.Context, *BookId) (*Book, error)
-	Update(context.Context, *BookUpdate) (*Book, error)
+	Update(context.Context, *Book) (*Book, error)
 	Delete(context.Context, *BookId) (*emptypb.Empty, error)
 	Borrow(context.Context, *BookId) (*emptypb.Empty, error)
 	Return(context.Context, *BookId) (*emptypb.Empty, error)
@@ -150,7 +150,7 @@ func (UnimplementedBookServiceServer) Create(context.Context, *BookRequest) (*Bo
 func (UnimplementedBookServiceServer) GetOne(context.Context, *BookId) (*Book, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOne not implemented")
 }
-func (UnimplementedBookServiceServer) Update(context.Context, *BookUpdate) (*Book, error) {
+func (UnimplementedBookServiceServer) Update(context.Context, *Book) (*Book, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedBookServiceServer) Delete(context.Context, *BookId) (*emptypb.Empty, error) {
@@ -238,7 +238,7 @@ func _BookService_GetOne_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _BookService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BookUpdate)
+	in := new(Book)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -250,7 +250,7 @@ func _BookService_Update_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: BookService_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookServiceServer).Update(ctx, req.(*BookUpdate))
+		return srv.(BookServiceServer).Update(ctx, req.(*Book))
 	}
 	return interceptor(ctx, in, info, handler)
 }

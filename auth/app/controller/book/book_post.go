@@ -16,6 +16,7 @@ type body struct {
 	Pages      int32  `json:"pages,omitempty"`
 	AuthorID   string `json:"author_id,omitempty"`
 	CategoryID string `json:"category_id,omitempty"`
+	Stock      int32  `json:"stock,omitempty"`
 }
 
 func BookPost(w http.ResponseWriter, r *http.Request) {
@@ -42,6 +43,7 @@ func BookPost(w http.ResponseWriter, r *http.Request) {
 		Pages:      body.Pages,
 		AuthorId:   body.AuthorID,
 		CategoryId: body.CategoryID,
+		Stock: body.Stock,
 	})
 
 	if err != nil {

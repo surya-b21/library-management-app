@@ -10,7 +10,7 @@ service BookService {
     rpc Get(google.protobuf.Empty) returns (BookList);
     rpc Create(BookRequest) returns (Book);
     rpc GetOne(BookId) returns (Book);
-    rpc Update(BookUpdate) returns (Book);
+    rpc Update(Book) returns (Book);
     rpc Delete(BookId) returns (google.protobuf.Empty);
     rpc Borrow(BookId) returns (google.protobuf.Empty);
     rpc Return(BookId) returns (google.protobuf.Empty);
@@ -30,6 +30,7 @@ message BookRequest {
     int32 pages = 2;
     string author_id = 3;
     string category_id = 4;
+    int32 stock = 5;
 }
 
 message BookList {
@@ -38,12 +39,4 @@ message BookList {
 
 message BookId {
     string id = 1;
-}
-
-message BookUpdate {
-    string id = 1;
-    string title = 2;
-    int32 pages = 3;
-    string author_id = 4;
-    string category_id = 5;
 }
