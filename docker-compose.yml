@@ -9,7 +9,7 @@ volumes:
 
 services:
   auth_service:
-    # container_name: auth_service
+    container_name: auth_service
     # build:
     #   context: ./auth
     #   dockerfile: Dockerfile
@@ -44,7 +44,7 @@ services:
           - auth_db
 
   book_service:
-    # container_name: book_service
+    container_name: book_service
     # build:
     #   context: ./auth
     #   dockerfile: Dockerfile
@@ -79,7 +79,7 @@ services:
           - book_db
 
   author_service:
-    # container_name: author_service
+    container_name: author_service
     # build:
     #   context: ./author
     #   dockerfile: Dockerfile
@@ -114,7 +114,7 @@ services:
           - author_db
 
   category_service:
-    # container_name: category_service
+    container_name: category_service
     # build:
     #   context: ./category
     #   dockerfile: Dockerfile

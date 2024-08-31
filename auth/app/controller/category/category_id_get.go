@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/surya-b21/library-management-app/auth/app/helper"
-	pb "github.com/surya-b21/library-management-app/category/app/pb"
+	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
 func CategoryIdGet(w http.ResponseWriter, r *http.Request) {

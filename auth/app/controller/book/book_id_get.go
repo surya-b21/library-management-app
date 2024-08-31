@@ -9,9 +9,7 @@ import (
 	"time"
 
 	"github.com/surya-b21/library-management-app/auth/app/helper"
-	pbauthor "github.com/surya-b21/library-management-app/author/app/pb"
-	pb "github.com/surya-b21/library-management-app/book/app/pb"
-	pbcategory "github.com/surya-b21/library-management-app/category/app/pb"
+	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
 func BookIdGet(w http.ResponseWriter, r *http.Request) {
@@ -61,12 +59,12 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 		}
 		defer conn.Close()
 
-		client := pbauthor.NewAuthorServiceClient(conn)
+		client := pb.NewAuthorServiceClient(conn)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		res, err := client.GetOne(ctx, &pbauthor.AuthorId{Id: res.AuthorId})
+		res, err := client.GetOne(ctx, &pb.AuthorId{Id: res.AuthorId})
 		if err != nil {
 			log.Println("error sending request:", err)
 			return
@@ -87,12 +85,12 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 		}
 		defer conn.Close()
 
-		client := pbcategory.NewCategoryServiceClient(conn)
+		client := pb.NewCategoryServiceClient(conn)
 
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		res, err := client.GetOne(ctx, &pbcategory.CategoryId{Id: res.CategoryId})
+		res, err := client.GetOne(ctx, &pb.CategoryId{Id: res.CategoryId})
 		if err != nil {
 			log.Println("error sending request:", err)
 			return
