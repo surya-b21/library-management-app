@@ -43,7 +43,7 @@ func BookPost(w http.ResponseWriter, r *http.Request) {
 		Pages:      body.Pages,
 		AuthorId:   body.AuthorID,
 		CategoryId: body.CategoryID,
-		Stock: body.Stock,
+		Stock:      body.Stock,
 	})
 
 	if err != nil {
@@ -58,6 +58,7 @@ func BookPost(w http.ResponseWriter, r *http.Request) {
 		"pages":       res.Pages,
 		"author_id":   res.AuthorId,
 		"category_id": res.CategoryId,
+		"stock":       res.Stock,
 	})
 
 	if err != nil {

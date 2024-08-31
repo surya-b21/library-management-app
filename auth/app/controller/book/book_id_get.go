@@ -45,6 +45,7 @@ func BookIdGet(w http.ResponseWriter, r *http.Request) {
 		"pages":       res.Pages,
 		"author_id":   res.AuthorId,
 		"category_id": res.CategoryId,
+		"stock":       res.Stock,
 	}
 
 	// look for author and category

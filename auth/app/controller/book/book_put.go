@@ -56,6 +56,7 @@ func BookPut(w http.ResponseWriter, r *http.Request) {
 		"pages":       res.Pages,
 		"author_id":   res.AuthorId,
 		"category_id": res.CategoryId,
+		"stock":       res.Stock,
 	})
 
 	if err != nil {

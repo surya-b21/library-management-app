@@ -104,6 +104,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 			"author":      author,
 			"category_id": book.CategoryId,
 			"category":    category,
+			"stock":       book.Stock,
 		})
 	}
 
