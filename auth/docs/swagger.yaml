@@ -82,6 +82,50 @@ info:
   title: Library Management App API
   version: "1.0"
 paths:
+  /auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: Sign in to get bearer token
+      parameters:
+      - description: Sign In Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/auth.SignInBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.JsonResult'
+      summary: Sign In
+      tags:
+      - Auth
+  /auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Sign up new account
+      parameters:
+      - description: Sign Up Payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/auth.SignUpBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.JsonResult'
+      summary: Sign Up
+      tags:
+      - Auth
   /author:
     get:
       consumes:
@@ -461,50 +505,6 @@ paths:
       summary: CategoryPut
       tags:
       - Category
-  /sign-in:
-    post:
-      consumes:
-      - application/json
-      description: Sign in to get bearer token
-      parameters:
-      - description: Sign In Payload
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/auth.SignInBody'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/auth.JsonResult'
-      summary: Sign In
-      tags:
-      - Auth
-  /sign-up:
-    post:
-      consumes:
-      - application/json
-      description: Sign up new account
-      parameters:
-      - description: Sign Up Payload
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/auth.SignUpBody'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/auth.JsonResult'
-      summary: Sign Up
-      tags:
-      - Auth
 securityDefinitions:
   "":
     in: header

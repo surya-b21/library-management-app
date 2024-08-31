@@ -13,6 +13,9 @@ func NewErrorResponse(w http.ResponseWriter, statusCode int, errors string) {
 	})
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.WriteHeader(statusCode)
 	w.Write(response)
 	fmt.Printf("error: %s", errors)
@@ -20,7 +23,6 @@ func NewErrorResponse(w http.ResponseWriter, statusCode int, errors string) {
 
 // NewSuccessResponse for success response
 func NewSuccessResponse(w http.ResponseWriter, response []byte) {
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	w.Write(response)
 }

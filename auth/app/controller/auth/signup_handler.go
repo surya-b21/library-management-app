@@ -20,7 +20,7 @@ import (
 // @Produce		 application/json
 // @Param        data   body  auth.SignUpBody  true  "Sign Up Payload"
 // @Success      200  {object} auth.JsonResult
-// @Router       /sign-up [post]
+// @Router       /auth/sign-up [post]
 func (handler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	var body SignUpBody
 

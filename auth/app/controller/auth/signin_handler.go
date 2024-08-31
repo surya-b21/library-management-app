@@ -20,7 +20,7 @@ import (
 // @Produce		 application/json
 // @Param        data   body  auth.SignInBody  true  "Sign In Payload"
 // @Success      200  {object} auth.JsonResult
-// @Router       /sign-in [post]
+// @Router       /auth/sign-in [post]
 func (handler *AuthHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 	var body SignInBody
 

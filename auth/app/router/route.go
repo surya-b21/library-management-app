@@ -21,41 +21,51 @@ func NewRoute() *Route {
 // InitRoutes to initiate route
 func (r *Route) InitRoutes() *http.ServeMux {
 	auth := auth.AuthHandler{}
-	mux := http.NewServeMux()
 
-	mux.HandleFunc("POST /sign-up", auth.SignUp)
-	mux.HandleFunc("POST /sign-in", auth.SignIn)
-	mux.HandleFunc("GET /protected", middleware.UserIdentify(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Success access protected route"))
-	}))
-
-	// book api
-	mux.HandleFunc("GET /book", middleware.UserIdentify(book.BookGet))
-	mux.HandleFunc("POST /book", middleware.UserIdentify(book.BookPost))
-	mux.HandleFunc("GET /book-recomendation/", middleware.UserIdentify(book.BookRecomendation))
-	mux.HandleFunc("POST /book/borrow/{id}", middleware.UserIdentify(book.BookBorrow))
-	mux.HandleFunc("POST /book/return/{id}", middleware.UserIdentify(book.BookReturn))
-	mux.HandleFunc("GET /book/{id}", middleware.UserIdentify(book.BookIdGet))
-	mux.HandleFunc("PUT /book/{id}", middleware.UserIdentify(book.BookPut))
-	mux.HandleFunc("DELETE /book/{id}", middleware.UserIdentify(book.BookDelete))
-
-	// author api
-	mux.HandleFunc("GET /author", middleware.UserIdentify(author.AuthorGet))
-	mux.HandleFunc("POST /author", middleware.UserIdentify(author.AuthorPost))
-	mux.HandleFunc("GET /author/{id}", middleware.UserIdentify(author.AuthorIdGet))
-	mux.HandleFunc("PUT /author/{id}", middleware.UserIdentify(author.AuthorPut))
-	mux.HandleFunc("DELETE /author/{id}", middleware.UserIdentify(author.AuthorDelete))
-
-	// category api
-	mux.HandleFunc("GET /category", middleware.UserIdentify(category.CategoryGet))
-	mux.HandleFunc("POST /category", middleware.UserIdentify(category.CategoryPost))
-	mux.HandleFunc("GET /category/{id}", middleware.UserIdentify(category.CategoryIdGet))
-	mux.HandleFunc("PUT /category/{id}", middleware.UserIdentify(category.CategoryPut))
-	mux.HandleFunc("DELETE /category/{id}", middleware.UserIdentify(category.CategoryDelete))
-
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	unauthorizedRoute := http.NewServeMux()
+	unauthorizedRoute.HandleFunc("POST /sign-up", auth.SignUp)
+	unauthorizedRoute.HandleFunc("POST /sign-in", auth.SignIn)
+	unauthorizedRoute.HandleFunc("GET /test", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Test route"))
 	})
 
-	return mux
+	authorizedRoute := http.NewServeMux()
+
+	// book api
+	authorizedRoute.HandleFunc("GET /book", book.BookGet)
+	authorizedRoute.HandleFunc("POST /book", book.BookPost)
+	authorizedRoute.HandleFunc("GET /book-recomendation/", book.BookRecomendation)
+	authorizedRoute.HandleFunc("POST /book/borrow/{id}", book.BookBorrow)
+	authorizedRoute.HandleFunc("POST /book/return/{id}", book.BookReturn)
+	authorizedRoute.HandleFunc("GET /book/{id}", book.BookIdGet)
+	authorizedRoute.HandleFunc("PUT /book/{id}", book.BookPut)
+	authorizedRoute.HandleFunc("DELETE /book/{id}", book.BookDelete)
+
+	// author api
+	authorizedRoute.HandleFunc("GET /author", author.AuthorGet)
+	authorizedRoute.HandleFunc("POST /author", author.AuthorPost)
+	authorizedRoute.HandleFunc("GET /author/{id}", author.AuthorIdGet)
+	authorizedRoute.HandleFunc("PUT /author/{id}", author.AuthorPut)
+	authorizedRoute.HandleFunc("DELETE /author/{id}", author.AuthorDelete)
+
+	// category api
+	authorizedRoute.HandleFunc("GET /category", category.CategoryGet)
+	authorizedRoute.HandleFunc("POST /category", category.CategoryPost)
+	authorizedRoute.HandleFunc("GET /category/{id}", category.CategoryIdGet)
+	authorizedRoute.HandleFunc("PUT /category/{id}", category.CategoryPut)
+	authorizedRoute.HandleFunc("DELETE /category/{id}", category.CategoryDelete)
+
+	authorizedRoute.HandleFunc("GET /protected", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Success access protected route"))
+	})
+
+	authorizedMiddleware := middleware.MiddlewareStack(
+		middleware.Cors,
+		middleware.UserIdentify,
+	)
+
+	router := http.NewServeMux()
+	router.Handle("/", authorizedMiddleware(authorizedRoute))
+	router.Handle("/auth/", http.StripPrefix("/auth", middleware.Cors(unauthorizedRoute)))
+	return router
 }
