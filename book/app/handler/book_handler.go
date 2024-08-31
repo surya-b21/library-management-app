@@ -65,8 +65,8 @@ func (h *Handler) Create(ctx context.Context, req *pb.BookRequest) (*pb.Book, er
 	}, nil
 }
 
-func (h *Handler) Get(ctx context.Context, req *emptypb.Empty) (*pb.BookList, error) {
-	result := h.repo.GetAll(ctx)
+func (h *Handler) Get(ctx context.Context, req *pb.BookParam) (*pb.BookList, error) {
+	result := h.repo.GetAll(ctx, req)
 
 	bookList := make([]*pb.Book, len(result))
 

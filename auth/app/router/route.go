@@ -32,11 +32,12 @@ func (r *Route) InitRoutes() *http.ServeMux {
 	// book api
 	mux.HandleFunc("GET /book", middleware.UserIdentify(book.BookGet))
 	mux.HandleFunc("POST /book", middleware.UserIdentify(book.BookPost))
+	mux.HandleFunc("GET /book-recomendation/", middleware.UserIdentify(book.BookRecomendation))
+	mux.HandleFunc("POST /book/borrow/{id}", middleware.UserIdentify(book.BookBorrow))
+	mux.HandleFunc("POST /book/return/{id}", middleware.UserIdentify(book.BookReturn))
 	mux.HandleFunc("GET /book/{id}", middleware.UserIdentify(book.BookIdGet))
 	mux.HandleFunc("PUT /book/{id}", middleware.UserIdentify(book.BookPut))
 	mux.HandleFunc("DELETE /book/{id}", middleware.UserIdentify(book.BookDelete))
-	mux.HandleFunc("POST /book/borrow/{id}", middleware.UserIdentify(book.BookBorrow))
-	mux.HandleFunc("POST /book/return/{id}", middleware.UserIdentify(book.BookReturn))
 
 	// author api
 	mux.HandleFunc("GET /author", middleware.UserIdentify(author.AuthorGet))

@@ -7,7 +7,7 @@ package book;
 option go_package = "./book/app/pb";
 
 service BookService {
-    rpc Get(google.protobuf.Empty) returns (BookList);
+    rpc Get(BookParam) returns (BookList);
     rpc Create(BookRequest) returns (Book);
     rpc GetOne(BookId) returns (Book);
     rpc Update(Book) returns (Book);
@@ -39,4 +39,9 @@ message BookList {
 
 message BookId {
     string id = 1;
+}
+
+message BookParam {
+    string title = 1;
+    bool random = 2;
 }

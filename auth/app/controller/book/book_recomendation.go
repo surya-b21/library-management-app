@@ -12,9 +12,7 @@ import (
 	"github.com/surya-b21/library-management-app/auth/app/pb"
 )
 
-func BookGet(w http.ResponseWriter, r *http.Request) {
-	search := r.URL.Query().Get("title")
-
+func BookRecomendation(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("book")
 	if conn == nil {
 		return
@@ -27,7 +25,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	res, err := client.Get(ctx, &pb.BookParam{
-		Title: search,
+		Random: true,
 	})
 	if err != nil {
 		fmt.Println("error sending request:", err)

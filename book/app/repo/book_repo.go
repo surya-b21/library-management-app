@@ -2,8 +2,10 @@ package repo
 
 import (
 	"context"
+	"strings"
 
 	"github.com/surya-b21/library-management-app/book/app/model"
+	"github.com/surya-b21/library-management-app/book/app/pb"
 	"github.com/surya-b21/library-management-app/book/app/service"
 )
 
@@ -29,11 +31,21 @@ func (b *BookRepository) Get(ctx context.Context, id string) model.Book {
 	return book
 }
 
-func (b *BookRepository) GetAll(ctx context.Context) []model.Book {
+func (b *BookRepository) GetAll(ctx context.Context, req *pb.BookParam) []model.Book {
 	db := service.DB
 
 	bookList := []model.Book{}
-	db.Select("id", "title", "pages", "author_id", "category_id", "stock").Find(&bookList)
+	query := db.Select("id", "title", "pages", "author_id", "category_id", "stock")
+
+	if req.Title != "" {
+		query = query.Where("LOWER(title) LIKE ?", "%"+strings.ToLower(req.Title)+"%")
+	}
+
+	if req.Random {
+		query = query.Order("RANDOM()").Limit(5)
+	}
+
+	query = query.Find(&bookList)
 
 	return bookList
 }
