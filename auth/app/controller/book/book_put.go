@@ -60,6 +60,7 @@ func BookPut(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		Println	}
+		log.Println(err)
+	}
 	helper.NewSuccessResponse(w, json)
 }

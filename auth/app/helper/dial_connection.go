@@ -25,7 +25,7 @@ func ServerDial(service string) *grpc.ClientConn {
 
 	conn, err := grpc.NewClient(address[service], opts...)
 	if err != nil {
-		log.Println("fail to dial: %v", err)
+		log.Printf("fail to dial: %v\n", err)
 		return nil
 	}
 

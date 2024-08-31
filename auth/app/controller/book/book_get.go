@@ -108,7 +108,7 @@ func BookGet(w http.ResponseWriter, r *http.Request) {
 
 	json, err := json.Marshal(listBook)
 	if err != nil {
-		log.Prinln(err)
+		log.Println(err)
 	}
 
 	helper.NewSuccessResponse(w, json)
