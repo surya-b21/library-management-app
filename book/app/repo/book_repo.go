@@ -58,3 +58,25 @@ func (b *BookRepository) Delete(ctx context.Context, id string) {
 
 	db.Where("id = ?", id).Delete(&model.Book{})
 }
+
+func (b *BookRepository) Borrow(ctx context.Context, id string) {
+	db := service.DB
+
+	book := model.Book{}
+	db.Where("id = ?", id).First(&book)
+
+	newStock := *book.Stock - 1
+	book.Stock = &newStock
+	db.Save(&book)
+}
+
+func (b *BookRepository) Return(ctx context.Context, id string) {
+	db := service.DB
+
+	book := model.Book{}
+	db.Where("id = ?", id).First(&book)
+
+	newStock := *book.Stock + 1
+	book.Stock = &newStock
+	db.Save(&book)
+}

@@ -12,4 +12,5 @@ type BookAPI struct {
 	Pages      *int32     `gorm:"type:integer"`
 	AuthorID   *uuid.UUID `gorm:"type:varchar(36)"`
 	CategoryID *uuid.UUID `gorm:"type:varchar(36)"`
+	Stock      *int32     `gorm:"type:integer; default:0"`
 }

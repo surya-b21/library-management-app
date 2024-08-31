@@ -12,14 +12,17 @@ service BookService {
     rpc GetOne(BookId) returns (Book);
     rpc Update(BookUpdate) returns (Book);
     rpc Delete(BookId) returns (google.protobuf.Empty);
+    rpc Borrow(BookId) returns (google.protobuf.Empty);
+    rpc Return(BookId) returns (google.protobuf.Empty);
 }
 
 message Book {
     string id = 1;
-    string title = 5;
-    int32 pages = 6;
-    string author_id = 7;
-    string category_id = 8;
+    string title = 2;
+    int32 pages = 3;
+    string author_id = 4;
+    string category_id = 5;
+    int32 stock = 6;
 }
 
 message BookRequest {

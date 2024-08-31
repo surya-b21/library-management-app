@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"sync"
 
 	"github.com/surya-b21/library-management-app/book/app/model"
 	"github.com/surya-b21/library-management-app/book/app/pb"
@@ -130,6 +131,35 @@ func (h *Handler) Delete(ctx context.Context, req *pb.BookId) (*emptypb.Empty, e
 	}
 
 	h.repo.Delete(ctx, req.Id)
+
+	return &emptypb.Empty{}, nil
+}
+
+func (h *Handler) Borrow(ctx context.Context, req *pb.BookId) (*emptypb.Empty, error) {
+	if req.Id == "" {
+		return nil, status.Errorf(codes.InvalidArgument, "id cannot empty")
+	}
+
+	// handle race condition
+	var mtx sync.Mutex
+
+	mtx.Lock()
+	h.repo.Borrow(ctx, req.Id)
+	mtx.Unlock()
+
+	return &emptypb.Empty{}, nil
+}
+
+func (h *Handler) Return(ctx context.Context, req *pb.BookId) (*emptypb.Empty, error) {
+	if req.Id == "" {
+		return nil, status.Errorf(codes.InvalidArgument, "id cannot empty")
+	}
+
+	var mtx sync.Mutex
+
+	mtx.Lock()
+	h.repo.Return(ctx, req.Id)
+	mtx.Unlock()
 
 	return &emptypb.Empty{}, nil
 }
