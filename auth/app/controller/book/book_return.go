@@ -11,7 +11,7 @@ import (
 	pb "github.com/surya-b21/library-management-app/book/app/pb"
 )
 
-func BookBorrow(w http.ResponseWriter, r *http.Request) {
+func BookReturn(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {
 		helper.NewErrorResponse(w, http.StatusBadRequest, "please fill book id")
@@ -29,7 +29,7 @@ func BookBorrow(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	_, err := client.Borrow(ctx, &pb.BookId{Id: id})
+	_, err := client.Return(ctx, &pb.BookId{Id: id})
 	if err != nil {
 		log.Println("error sending request:", err)
 		helper.NewErrorResponse(w, http.StatusBadRequest, "Bad request")
@@ -37,7 +37,7 @@ func BookBorrow(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json, err := json.Marshal(map[string]string{
-		"message": "Successfully borrow book",
+		"message": "Successfully return book",
 	})
 
 	if err != nil {
