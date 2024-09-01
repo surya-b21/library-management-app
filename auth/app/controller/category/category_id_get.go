@@ -20,6 +20,7 @@ import (
 // @Param id path string true "Category ID"
 // @Success      200 {object} pb.Category
 // @Router       /category/{id} [get]
+// @Security BearerAuth
 func CategoryIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

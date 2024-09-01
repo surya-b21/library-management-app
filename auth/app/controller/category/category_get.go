@@ -20,6 +20,7 @@ import (
 // @Produce		 application/json
 // @Success      200 {object} []pb.Category
 // @Router       /category [get]
+// @Security BearerAuth
 func CategoryGet(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("category")
 	if conn == nil {

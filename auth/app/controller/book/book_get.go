@@ -21,6 +21,7 @@ import (
 // @Param title query string false "Book title"
 // @Success      200 {object} []pb.Book
 // @Router       /book [get]
+// @Security BearerAuth
 func BookGet(w http.ResponseWriter, r *http.Request) {
 	search := r.URL.Query().Get("title")
 

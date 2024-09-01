@@ -20,6 +20,7 @@ import (
 // @Produce		 application/json
 // @Success      200 {object} []pb.Book
 // @Router       /book-recommendation [get]
+// @Security BearerAuth
 func BookRecomendation(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("book")
 	if conn == nil {

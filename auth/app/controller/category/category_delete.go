@@ -19,6 +19,7 @@ import (
 // @Param id path string true "Category ID"
 // @Success      200  {string} string "Successfully delete category"
 // @Router       /category/{id} [delete]
+// @Security BearerAuth
 func CategoryDelete(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

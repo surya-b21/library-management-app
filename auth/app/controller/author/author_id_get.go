@@ -20,6 +20,7 @@ import (
 // @Param id path string true "Author ID"
 // @Success      200 {object} pb.Author
 // @Router       /author/{id} [get]
+// @Security BearerAuth
 func AuthorIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

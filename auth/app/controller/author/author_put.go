@@ -21,6 +21,7 @@ import (
 // @Param data body author.body true "Author Payload"
 // @Success      200 {object} pb.Author
 // @Router       /author/{id} [put]
+// @Security BearerAuth
 func AuthorPut(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

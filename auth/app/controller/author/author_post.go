@@ -24,6 +24,7 @@ type body struct {
 // @Param data body author.body true "Author Payload"
 // @Success      200 {object} pb.Author
 // @Router       /author [post]
+// @Security BearerAuth
 func AuthorPost(w http.ResponseWriter, r *http.Request) {
 	var body body
 	err := json.NewDecoder(r.Body).Decode(&body)

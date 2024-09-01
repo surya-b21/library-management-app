@@ -20,6 +20,7 @@ import (
 // @Param id path string true "Book ID"
 // @Success      200  {string} string "Successfully return book"
 // @Router       /book/return/{id} [post]
+// @Security BearerAuth
 func BookReturn(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

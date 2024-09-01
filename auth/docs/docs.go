@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/auth/sign-in": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Sign in to get bearer token",
                 "consumes": [
                     "application/json"
@@ -51,6 +56,11 @@ const docTemplate = `{
         },
         "/auth/sign-up": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Sign up new account",
                 "consumes": [
                     "application/json"
@@ -212,6 +222,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a author",
                 "consumes": [
                     "application/json"
@@ -244,6 +259,11 @@ const docTemplate = `{
         },
         "/book": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Get list of book",
                 "consumes": [
                     "application/json"
@@ -779,7 +799,8 @@ const docTemplate = `{
         }
     },
     "securityDefinitions": {
-        "": {
+        "BearerAuth": {
+            "description": "Bearer token",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"

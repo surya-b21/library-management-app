@@ -101,6 +101,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/auth.JsonResult'
+      security:
+      - ApiKeyAuth: []
       summary: Sign In
       tags:
       - Auth
@@ -123,6 +125,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/auth.JsonResult'
+      security:
+      - ApiKeyAuth: []
       summary: Sign Up
       tags:
       - Auth
@@ -182,6 +186,8 @@ paths:
           description: Successfully delete author
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: AuthorDelete
       tags:
       - Author
@@ -250,6 +256,8 @@ paths:
             items:
               $ref: '#/definitions/pb.Book'
             type: array
+      security:
+      - BearerAuth: []
       summary: BookGet
       tags:
       - Book
@@ -506,7 +514,8 @@ paths:
       tags:
       - Category
 securityDefinitions:
-  "":
+  BearerAuth:
+    description: Bearer token
     in: header
     name: Authorization
     type: apiKey

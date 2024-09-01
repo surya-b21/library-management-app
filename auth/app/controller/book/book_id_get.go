@@ -21,6 +21,7 @@ import (
 // @Param id path string true "Book ID"
 // @Success      200 {object} pb.Book
 // @Router       /book/{id} [get]
+// @Security BearerAuth
 func BookIdGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

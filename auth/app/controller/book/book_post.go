@@ -28,6 +28,7 @@ type body struct {
 // @Param data body book.body true "Book Payload"
 // @Success      200 {object} pb.Book
 // @Router       /book [post]
+// @Security BearerAuth
 func BookPost(w http.ResponseWriter, r *http.Request) {
 	var body body
 	err := json.NewDecoder(r.Body).Decode(&body)

@@ -3,6 +3,7 @@ package router
 import (
 	"net/http"
 
+	"github.com/rs/cors"
 	"github.com/surya-b21/library-management-app/auth/app/controller/auth"
 	"github.com/surya-b21/library-management-app/auth/app/controller/author"
 	"github.com/surya-b21/library-management-app/auth/app/controller/book"
@@ -19,7 +20,7 @@ func NewRoute() *Route {
 }
 
 // InitRoutes to initiate route
-func (r *Route) InitRoutes() *http.ServeMux {
+func (r *Route) InitRoutes() http.Handler {
 	auth := auth.AuthHandler{}
 
 	unauthorizedRoute := http.NewServeMux()
@@ -60,12 +61,18 @@ func (r *Route) InitRoutes() *http.ServeMux {
 	})
 
 	authorizedMiddleware := middleware.MiddlewareStack(
-		middleware.Cors,
 		middleware.UserIdentify,
 	)
 
 	router := http.NewServeMux()
 	router.Handle("/", authorizedMiddleware(authorizedRoute))
-	router.Handle("/auth/", http.StripPrefix("/auth", middleware.Cors(unauthorizedRoute)))
-	return router
+	router.Handle("/auth/", http.StripPrefix("/auth", unauthorizedRoute))
+
+	cors := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders: []string{"Content-Type", "Authorization"},
+	})
+
+	return cors.Handler(router)
 }

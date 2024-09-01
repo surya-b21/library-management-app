@@ -19,6 +19,7 @@ import (
 // @Param id path string true "Book ID"
 // @Success      200  {string} string "Successfully delete book"
 // @Router       /book/{id} [delete]
+// @Security BearerAuth
 func BookDelete(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

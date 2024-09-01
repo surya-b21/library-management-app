@@ -13,9 +13,10 @@ import (
 // @description For library management api for test purpose
 // @host localhost:8080
 // @BasePath /
-// @securitydefinitions.apikey
+// @securitydefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
+// @description Bearer token
 func main() {
 	routes := router.NewRoute()
 	server := service.Server{}

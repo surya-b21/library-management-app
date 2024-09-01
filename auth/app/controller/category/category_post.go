@@ -24,6 +24,7 @@ type body struct {
 // @Param data body category.body true "Category Payload"
 // @Success      200 {object} pb.Category
 // @Router       /category [post]
+// @Security BearerAuth
 func CategoryPost(w http.ResponseWriter, r *http.Request) {
 	var body body
 	err := json.NewDecoder(r.Body).Decode(&body)

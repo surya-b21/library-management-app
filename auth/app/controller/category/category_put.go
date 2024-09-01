@@ -21,6 +21,7 @@ import (
 // @Param data body category.body true "Category Payload"
 // @Success      200 {object} pb.Category
 // @Router       /category/{id} [put]
+// @Security BearerAuth
 func CategoryPut(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	if id == "" {

@@ -20,6 +20,7 @@ import (
 // @Produce		 application/json
 // @Success      200 {object} []pb.Author
 // @Router       /author [get]
+// @Security BearerAuth
 func AuthorGet(w http.ResponseWriter, r *http.Request) {
 	conn := helper.ServerDial("author")
 	if conn == nil {
